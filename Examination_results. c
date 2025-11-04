@@ -1,0 +1,40 @@
+/*
+Name:Godfrey Wesonga
+RegNo:PA106/G/28754/25
+Description:Program to define a structure to hold a student information
+            reads all the records from the binary file. Display the names and marks
+            of each students on the screen.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Student {
+    char name[50];
+    char reg_no[20];
+    float total_marks;
+};
+
+int main() {
+    FILE *fp;
+    struct Student s;
+
+    fp = fopen("results.dat", "rb"); // open binary file for reading
+    if (fp == NULL) {
+        printf("Error opening results.dat file!\n");
+        return 1;
+    }
+
+    printf("Student Results:\n");
+    printf("---------------------------\n");
+
+    while (fread(&s, sizeof(struct Student), 1, fp)) {
+        printf("Name: %s\n", s.name);
+        printf("Reg No: %s\n", s.reg_no);
+        printf("Total Marks: %.2f\n", s.total_marks);
+        printf("---------------------------\n");
+    }
+
+    fclose(fp);
+    return 0;
+}
