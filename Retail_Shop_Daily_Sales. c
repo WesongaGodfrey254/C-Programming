@@ -1,0 +1,29 @@
+/*
+Name:Godfrey Wesonga
+RegNo:PA106/G/28754/25
+Description: Program to read all transaction from the file.
+             To calculate and display the total sales for the day.
+             And ensures the file is properly closed after reading.
+*/
+
+#include <stdio.h>
+
+int main() {
+    FILE *fp;
+    float amount, total = 0;
+
+    fp = fopen("sales.txt", "r"); // open file for reading
+    if (fp == NULL) {
+        printf("Error opening sales.txt file!\n");
+        return 1;
+    }
+
+    while (fscanf(fp, "%f", &amount) == 1) {
+        total += amount;
+    }
+
+    fclose(fp);
+    printf("Total Sales for the Day: %.2f\n", total);
+
+    return 0;
+}
